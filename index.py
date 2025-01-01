@@ -23,9 +23,13 @@ else:
 
 
 # function for user to chose time line
-def choose_timeline(input_tl, timeline):
+def choose_timeline(input_tl, timeline, posted_time):
+
+  key_val = dict(zip(posted_time, timeline[0]))
+
   if input_tl == 0.5:
-    return f'highest views in 30 minutes: {max(timeline[0])}'
+    return f'key val test: {key_val}'
+    # return f'highest views in 30 minutes: {timeline[0]}\nPosted time: {posted_time}'
   elif input_tl == 1:
     return f'highest views in 1 hours: {max(timeline[1])}'
   elif input_tl == 2:
@@ -45,6 +49,7 @@ def open_csv():
     an_hr_arr = []
     two_hrs_arr = []
     twfo_hrs_arr = []
+    posted_time_arr = []
 
     for col in csv_reader:
       date = col[2] #for next update
@@ -59,11 +64,13 @@ def open_csv():
       an_hr_arr.append(after_an_hr)
       two_hrs_arr.append(after_two_hrs)
       twfo_hrs_arr.append(after_twfo_hrs)
+      posted_time_arr.append(posted_time)
 
+    print(f'posted time {posted_time_arr}')
     print("choose timeline: ")
     print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
     input_timeline = float(input("input by typing the number: "))
-    print(choose_timeline(input_timeline, [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr]))
+    print(choose_timeline(input_timeline, [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr], posted_time_arr))
 
 print('=== welcome to simple analyst app for content creator =====')
 print('(click 1 to continue)')

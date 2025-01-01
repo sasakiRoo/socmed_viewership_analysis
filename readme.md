@@ -1,6 +1,6 @@
 # SOCMED VIEWERSHIP ANALYSIS
 
-v 1.0.0
+v 1.0.1
 
 ## Purposes
 
@@ -10,9 +10,9 @@ to analyse the best timing to post on social media from a csv file
 
 `status: not final`
 
-`latest commit: add highest views according to timeline`
+`latest commit: add initial key value pairs`
 
-The latest commit implements functionality that displays the highest views from the table based on the timeline (0.5 hours, 1 hour, 2 hours, or 24 hours). This allows users to quickly identify the maximum value for each time span.
+The latest commit implements functionality that displays key value pairs in first 30 minutes.
 
 ## CSV table timeline views
 
@@ -35,7 +35,7 @@ For the above table, the highest values per column are:
 - **2 hours**: 63
 - **24 hours**: 93
 
-These maximum values help highlight the most time-consuming tasks over different timelines.
+These maximum views help highlight the most views of a video in different time spans
 
 <hr>
 
