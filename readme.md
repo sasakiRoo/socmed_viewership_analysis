@@ -2,7 +2,7 @@
 
 v 1.0.0
 
-# Purposes
+## Purposes
 
 to analyse the best timing to post on social media from a csv file
 
@@ -37,15 +37,11 @@ For the above table, the highest values per column are:
 
 These maximum values help highlight the most time-consuming tasks over different timelines.
 
-### How to Use
-
-You can generate new values or modify the table data according to your project needs. Make sure to update the README accordingly when new commits are made.
-
 <hr>
 
-# HOW TO USE
+## HOW TO USE
 
-## run project
+### run project
 
 `python3 index.py`
 
