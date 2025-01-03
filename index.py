@@ -23,19 +23,29 @@ else:
 
 
 # function for user to chose time line
-def choose_timeline(input_tl, timeline, posted_time):
-
-  key_val = dict(zip(posted_time, timeline[0]))
-
+def choose_timeline(input_tl, timeline_views, posted_time):
   if input_tl == 0.5:
-    return f'key val test: {key_val}'
-    # return f'highest views in 30 minutes: {timeline[0]}\nPosted time: {posted_time}'
+    key_val = dict(zip(posted_time, timeline_views[0]))
+    return show_table_time_span(key_val)
   elif input_tl == 1:
-    return f'highest views in 1 hours: {max(timeline[1])}'
+     key_val = dict(zip(posted_time, timeline_views[1]))
+     return show_table_time_span(key_val)
   elif input_tl == 2:
-    return f'highest views in 2 hours: {max(timeline[2])}'
+     key_val = dict(zip(posted_time, timeline_views[2]))
+     return show_table_time_span(key_val)
   elif input_tl == 24:
-    return f'highest views in 24 hours: {max(timeline[3])}'
+     key_val = dict(zip(posted_time, timeline_views[3]))
+     return show_table_time_span(key_val)
+
+# table time span data print
+def show_table_time_span(data):
+  result = []
+  for key, value in data.items():
+    result.append(f"| {key} | {value} |")
+  return "\n".join(result)
+
+# todo, find max value and posted_time that it associated with
+# max: 1000 at 19:00
 
 # function to open csv_file
 def open_csv():
@@ -66,7 +76,7 @@ def open_csv():
       twfo_hrs_arr.append(after_twfo_hrs)
       posted_time_arr.append(posted_time)
 
-    print(f'posted time {posted_time_arr}')
+    # print(f'posted time {posted_time_arr}')
     print("choose timeline: ")
     print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
     input_timeline = float(input("input by typing the number: "))
