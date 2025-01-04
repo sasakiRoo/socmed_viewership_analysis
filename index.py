@@ -23,19 +23,54 @@ else:
 
 
 # function for user to chose time line
-def choose_timeline(input_tl, timeline, posted_time):
+def choose_timeline(views_amount, posted_time):
+  print("choose timeline: ")
+  print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
+  get_input_timespan = float(input("input by typing the number: "))
 
-  key_val = dict(zip(posted_time, timeline[0]))
+  if get_input_timespan == 0.5:
+    key_val = dict(zip(posted_time, views_amount[0]))
+    return show_table_time_span(key_val, posted_time, views_amount[0], get_input_timespan)
 
-  if input_tl == 0.5:
-    return f'key val test: {key_val}'
-    # return f'highest views in 30 minutes: {timeline[0]}\nPosted time: {posted_time}'
-  elif input_tl == 1:
-    return f'highest views in 1 hours: {max(timeline[1])}'
-  elif input_tl == 2:
-    return f'highest views in 2 hours: {max(timeline[2])}'
-  elif input_tl == 24:
-    return f'highest views in 24 hours: {max(timeline[3])}'
+  elif get_input_timespan == 1:
+     key_val = dict(zip(posted_time, views_amount[1]))
+     return show_table_time_span(key_val, posted_time, views_amount[1], get_input_timespan)
+
+  elif get_input_timespan == 2:
+     key_val = dict(zip(posted_time, views_amount[2]))
+     return show_table_time_span(key_val, posted_time, views_amount[2], get_input_timespan)
+
+  elif get_input_timespan == 24:
+     key_val = dict(zip(posted_time, views_amount[3]))
+     return show_table_time_span(key_val, posted_time, views_amount[3], get_input_timespan)
+
+# table time span data print
+def show_table_time_span(data, posted_time, views_amount, timespan):
+  result = []
+
+  result.append(f'| time | views |')
+  result.append('-' * 17)
+
+  for key, value in data.items():
+    result.append(f"| {key} | {value} |")
+
+  print("\n".join(result))
+  print(get_max_views(posted_time, views_amount, timespan))
+
+# get maxium views for each timespan
+def get_max_views(posted_time, views, timespan):
+  combined = list(zip(posted_time, views))
+  max_time, max_val = max(combined, key=lambda x: x[1])
+  return f'maximum views in {timespan} hours is {max_val} video posted at {max_time}'
+
+''' asking user to choose 
+Select: | show all table [0] | show time span [1] |
+'''
+def input_prompt(prompt_input, views_amount, posted_time):
+  if prompt_input == 0:
+    print('not yet implemented') # TODO NEXT: show all tables. showing csv to terminal
+  elif prompt_input == 1:
+    choose_timeline(views_amount, posted_time)
 
 # function to open csv_file
 def open_csv():
@@ -66,11 +101,15 @@ def open_csv():
       twfo_hrs_arr.append(after_twfo_hrs)
       posted_time_arr.append(posted_time)
 
-    print(f'posted time {posted_time_arr}')
-    print("choose timeline: ")
-    print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
-    input_timeline = float(input("input by typing the number: "))
-    print(choose_timeline(input_timeline, [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr], posted_time_arr))
+      timespan_views_arr = [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr]
+
+    print('hello, welcome to simple analysis app')
+    print('\nSelect: | show all table [0] | show time span [1] |')
+    get_input = int(input(">>> "))
+
+    input_prompt(get_input, timespan_views_arr, posted_time_arr)
+     
+    
 
 print('=== welcome to simple analyst app for content creator =====')
 print('(click 1 to continue)')
@@ -84,3 +123,4 @@ def start():
     print("try again")
 
 start()
+
