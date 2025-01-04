@@ -1,6 +1,6 @@
 # SOCMED VIEWERSHIP ANALYSIS
 
-v 1.0.1
+v 2.0.0
 
 ## Purposes
 
