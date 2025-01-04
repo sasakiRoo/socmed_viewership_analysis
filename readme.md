@@ -10,9 +10,9 @@ to analyse the best timing to post on social media from a csv file
 
 `status: not final`
 
-`latest commit: add initial key value pairs`
+`latest commit: add timespan table and add get_maximum_views for each timespan`
 
-The latest commit implements functionality that displays key value pairs in first 30 minutes.
+The latest commit implements functionality that displays tables for each timespan and its highest views
 
 ## CSV table timeline views
 
@@ -35,7 +35,19 @@ For the above table, the highest values per column are:
 - **2 hours**: 63
 - **24 hours**: 93
 
-These maximum views help highlight the most views of a video in different time spans
+### Output
+
+| time  | 0.5 hours |
+| ----- | --------- |
+| 17:30 | 12        |
+| 20:10 | 23        |
+| 08:40 | 45        |
+| 13:30 | 56        |
+| 17:05 | 33        |
+
+`maximum views in 0.5 hours is 56 video posted at 13:30`
+
+These maximum views help highlight the most views of a video in different timespans
 
 <hr>
 
