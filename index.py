@@ -47,6 +47,17 @@ def show_table_time_span(data):
 # todo, find max value and posted_time that it associated with
 # max: 1000 at 19:00
 
+def prompt(prompt_input, timespan, posted_time):
+  if prompt_input == 0:
+    print('not yet implemented')
+  elif prompt_input == 1:
+    print("choose timeline: ")
+    print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
+    input_timeline = float(input("input by typing the number: "))
+    print(choose_timeline(input_timeline, timespan, posted_time))
+  elif prompt_input == 2:
+    print('not yet implemented')
+
 # function to open csv_file
 def open_csv():
   with open(data_sheets_use, newline='') as csvfile:
@@ -76,11 +87,15 @@ def open_csv():
       twfo_hrs_arr.append(after_twfo_hrs)
       posted_time_arr.append(posted_time)
 
-    # print(f'posted time {posted_time_arr}')
-    print("choose timeline: ")
-    print(f'| 0.5 hours | 1 hour | 2 hours | 24 hours')
-    input_timeline = float(input("input by typing the number: "))
-    print(choose_timeline(input_timeline, [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr], posted_time_arr))
+      timespan_arr = [half_hour_arr, an_hr_arr, two_hrs_arr, twfo_hrs_arr]
+
+    print('hello, welcome to simple analysis app')
+    print('\nSelect: | show all table [0] | show time span [1] | show max views | [2]')
+    inp_prompt = int(input(">>> "))
+
+    prompt(inp_prompt, timespan_arr, posted_time_arr)
+     
+    
 
 print('=== welcome to simple analyst app for content creator =====')
 print('(click 1 to continue)')
