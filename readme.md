@@ -1,6 +1,6 @@
 # SOCMED VIEWERSHIP ANALYSIS
 
-v 2.0.0
+v 2.1.1
 
 ## Purposes
 
@@ -10,9 +10,7 @@ to analyse the best timing to post on social media from a csv file
 
 `status: not final`
 
-`latest commit: add timespan table and add get_maximum_views for each timespan`
-
-The latest commit implements functionality that displays tables for each timespan and its highest views
+`latest commit: TODO: fix table columns size`
 
 ## CSV table timeline views
 

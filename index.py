@@ -11,12 +11,12 @@ import csv
 
 load_dotenv()
 
-isDev = os.getenv('isDev')
+is_dev = os.getenv('is_dev')
 
 data_sheets_use = None
 
 # you can ignore this block code bellow, only use template_sheets
-if isDev == 'dev':
+if is_dev == 'dev':
   data_sheets_use = 'priv/data_test.csv'
 else:
   data_sheets_use = 'data/template_sheets.csv'
@@ -60,12 +60,32 @@ def show_table_time_span(data, posted_time, views_amount, timespan):
 
 
 # show all data table
-def show_all_data_table(data): 
-  result = []
-  result.append('| {:<8} | {:<12} | {:<10} | {:<12} | {:<5} | {:<5} | {:<5} | {:<5}'.format('date', 'link', 'posted at', 'views 30 mis', 'views 1 hr', 'views 2 hrs', 'views 24 hrs', 'post type'))
+# TODO: fix size columns.
+def show_all_data_table(data):
+  max_length = [len('date'), len('link'), len('posted at'), len('views 30min'), len('views 1hr'), len('views 2hrs'), len('views 24hrs'), len('post type')]
+
   for row in data:
-    result.append('| {:<5} | {:<12} | {:<10} | {:<12} | {:<5} | {:<5} | {:<5} | {:<5} |'.format(row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
-  print("\n".join(result))
+    for index in range(len(row)):
+       print(f"Row[{index}] = {row[index]} ({type(row[index])})") #debug type of rows
+      # max_length = max(max_length[index], len(str(row[index])))
+
+  result = []
+  header_table = '| {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} |'.format('date', max_length[0], 'link', max_length[1], 'posted at', max_length[2], 'views 30min', max_length[3], 'views 1hr', max_length[4], 'views 2hrs', max_length[5], 'views 24hrs', max_length[6], 'post type', max_length[7])
+  result.append(header_table)
+
+  for row in data:
+    row_str = '| {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} |'.format(row[2], max_length[0], row[3], max_length[1], row[4], max_length[2], row[5], max_length[3], row[6], max_length[4], row[7], max_length[5], row[8], max_length[6], row[9], max_length[7])
+    result.append(row_str)
+
+  print('\n'.join(result))
+
+  # old code
+  # result = []
+  # table_size = 12
+  # result.append('| {:<} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8}'.format('date', 'link', 'posted at', 'views 30 mis', 'views 1 hr', 'views 2 hrs', 'views 24 hrs', 'post type'))
+  # for row in data:
+  #   result.append('| {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} |'.format(row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
+  # print("\n".join(result))
 
 
 # get maxium views for each timespan
