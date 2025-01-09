@@ -69,7 +69,6 @@ def show_table_time_span(data, posted_time, views_amount, timespan):
 
 
 # show all data table
-# TODO: fix size columns.
 def show_all_data_table(data):
     MAX_COL_SIZE = 8
 
