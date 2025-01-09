@@ -157,6 +157,8 @@ def input_prompt(prompt_input, views_amount, posted_time, data):
         show_all_data_table(data)
     elif prompt_input == 1:
         choose_timeline(views_amount, posted_time)
+    else:
+        print("try again")
 
 
 # function to open csv_file
