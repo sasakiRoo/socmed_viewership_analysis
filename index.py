@@ -15,11 +15,11 @@ is_dev = os.getenv("is_dev")
 
 data_sheets_use = None
 
-# you can ignore this block code bellow, only use template_sheets
+# you can ignore this block code bellow, only use template_sheet
 if is_dev == "dev":
     data_sheets_use = "priv/data_test.csv"
 else:
-    data_sheets_use = "data/template_sheets.csv"
+    data_sheets_use = "data/template_sheet.csv"
 
 
 # function for user to chose time line
@@ -56,7 +56,8 @@ def choose_timeline(views_amount, posted_time):
 # table time span data print
 def show_table_time_span(data, posted_time, views_amount, timespan):
     result = []
-
+    print(f"== here`s the result of your views in {timespan} ==")
+    result.append("-" * 27)
     result.append("| {:<9} | {:<9} |".format("posted at", "views"))
     result.append("-" * 27)
 
@@ -71,35 +72,73 @@ def show_table_time_span(data, posted_time, views_amount, timespan):
 # TODO: fix size columns.
 def show_all_data_table(data):
     MAX_COL_SIZE = 8
-    header = "| {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}}".format(
+
+    header = "| {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} | {:<{}} |".format(
         "date",
         MAX_COL_SIZE,
         "link",
         MAX_COL_SIZE,
         "posted at",
         MAX_COL_SIZE,
-        "views 30 mis",
+        "30min",
         MAX_COL_SIZE,
-        "views 1 hr",
+        "1hr",
         MAX_COL_SIZE,
-        "views 2 hrs",
+        "2 hrs",
         MAX_COL_SIZE,
-        "views 24 hrs",
+        "24 hrs",
         MAX_COL_SIZE,
         "post type",
         MAX_COL_SIZE,
     )
+    print("-" * len(header))
     print(header)
     print("-" * len(header))
 
     result = []
+    truncated_views = None
     for row in data:
+        truncated_links = truncate_links(row[3])
+
         result.append(
             "| {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} | {:<8} |".format(
-                row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]
+                row[2],
+                truncated_links,
+                row[4],
+                truncate_views(row[5]),
+                truncate_views(row[6]),
+                truncate_views(row[7]),
+                truncate_views(row[8]),
+                row[9],
             )
         )
     print("\n".join(result))
+    print("-" * len(header))
+
+
+# truncate text for links and views --------------------
+MAX_CONTENT_LENGTH = 5
+
+
+def truncate_links(link):
+    if len(link) > MAX_CONTENT_LENGTH:
+        return link[: MAX_CONTENT_LENGTH - 2] + "..."
+    else:
+        return link
+
+
+def truncate_views(views):
+    if len(views) == 7:
+        return views[: 7 - 6] + "M+"
+    elif len(views) == 6:
+        return views[: 6 - 3] + "K"
+    elif len(views) == 5:
+        return views[: 5 - 3] + "K"
+    else:
+        return views
+
+
+# truncate text for links and views --------------------
 
 
 # get maxium views for each timespan
