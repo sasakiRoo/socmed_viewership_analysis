@@ -56,8 +56,16 @@ This maximum views help highlight the most views of a video in different timespa
 
 ### clone repository
 
+### using ssh:
+
 ```
 git clone git@github.com:sasakiRoo/socmed_viewership_analysis.git
+```
+
+### using http:
+
+```
+git clone https://github.com/sasakiRoo/socmed_viewership_analysis.git
 ```
 
 ### create your own csv file - use the template_sheets.csv file as a template design guide
